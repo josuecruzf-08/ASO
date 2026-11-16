@@ -3,32 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Terrorismo: Información Básica, Problemas y Soluciones</title>
+    <title>Crónicas de Hallownest: Historia y Lore de Hollow Knight</title>
     <style>
         /* ==========================================================================
-           1. VARIABLES DE DISEÑO Y CONFIGURACIÓN BASE (PALETA EDITORIAL SOBRIA)
+           1. VARIABLES DE DISEÑO (PALETA ATMOSFÉRICA DE HALLOWNEST)
            ========================================================================== */
         :root {
-            --color-navy-950: #090e17;
-            --color-navy-900: #0f172a;
-            --color-slate-800: #1e293b;
-            --color-slate-700: #334155;
-            --color-slate-600: #475569;
-            --color-slate-400: #94a3b8;
-            --color-bone-100: #f8fafc;
-            --color-bone-200: #f1f5f9;
-            --color-border: #cbd5e1;
-            --color-accent-crimson: #991b1b;
-            --color-accent-crimson-hover: #7f1d1d;
-            --color-accent-amber: #b45309;
-            --color-white: #ffffff;
+            /* Fondos abismales y subterráneos */
+            --color-abyss-950: #0b0e14;
+            --color-abyss-900: #111622;
+            --color-hallownest-800: #141923;
+            --color-hallownest-700: #1e2636;
+            --color-hallownest-600: #2b364d;
+
+            /* Textos y tonos de Alma / Marfil */
+            --color-ivory: #f1faee;
+            --color-soul-blue: #8ecae6;
+            --color-soul-pale: #a8dadc;
+            --color-muted: #94a3b8;
+
+            /* Acentos de Esencia (Dorado) e Infección (Naranja) */
+            --color-essence-gold: #e9c46a;
+            --color-infection-orange: #f77f00;
+            --color-infection-glow: rgba(247, 127, 0, 0.22);
+            --color-soul-glow: rgba(142, 202, 230, 0.18);
 
             --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 
-            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
-            --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.1);
-            --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.15);
+            --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.45);
+            --shadow-glow-soul: 0 0 22px rgba(142, 202, 230, 0.15);
+            --shadow-glow-infection: 0 0 22px rgba(247, 127, 0, 0.2);
             --radius-md: 8px;
             --radius-lg: 12px;
             --transition-base: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -43,15 +48,15 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 80px;
+            scroll-padding-top: 82px;
             font-size: 16px;
         }
 
         body {
             font-family: var(--font-sans);
-            background-color: var(--color-bone-100);
-            color: var(--color-slate-800);
-            line-height: 1.65;
+            background-color: var(--color-abyss-950);
+            color: var(--color-ivory);
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -66,8 +71,9 @@
         /* Tipografía de encabezados */
         h1, h2, h3, h4 {
             font-family: var(--font-serif);
-            color: var(--color-navy-900);
+            color: var(--color-ivory);
             line-height: 1.25;
+            font-weight: 700;
         }
 
         /* ==========================================================================
@@ -77,21 +83,21 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: rgba(15, 23, 42, 0.97);
-            backdrop-filter: blur(8px);
-            border-bottom: 3px solid var(--color-accent-crimson);
-            box-shadow: var(--shadow-md);
+            background-color: rgba(11, 14, 20, 0.94);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-hallownest-600);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
         }
 
         .navbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 74px;
+            height: 76px;
             position: relative;
         }
 
-        /* Identidad / Logotipo textual */
+        /* Identidad / Emblema textual del reino */
         .brand {
             text-decoration: none;
             display: flex;
@@ -102,15 +108,16 @@
             font-family: var(--font-serif);
             font-size: 1.15rem;
             font-weight: 700;
-            color: var(--color-white);
-            letter-spacing: 0.03em;
+            color: var(--color-ivory);
+            letter-spacing: 0.08em;
             text-transform: uppercase;
+            text-shadow: 0 0 12px rgba(142, 202, 230, 0.35);
         }
 
         .brand-subtitle {
             font-size: 0.72rem;
-            color: var(--color-slate-400);
-            letter-spacing: 0.08em;
+            color: var(--color-soul-blue);
+            letter-spacing: 0.12em;
             text-transform: uppercase;
         }
 
@@ -123,23 +130,24 @@
         .nav-toggle-label {
             display: none;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.55rem;
             flex-direction: column;
             gap: 5px;
-            border: 1px solid var(--color-slate-700);
+            border: 1px solid var(--color-hallownest-600);
             border-radius: 6px;
+            background-color: var(--color-hallownest-800);
             transition: var(--transition-base);
         }
 
         .nav-toggle-label:hover {
-            border-color: var(--color-white);
+            border-color: var(--color-soul-blue);
         }
 
         .nav-toggle-label span {
             display: block;
             width: 24px;
             height: 2px;
-            background-color: var(--color-white);
+            background-color: var(--color-ivory);
             transition: var(--transition-base);
         }
 
@@ -148,7 +156,7 @@
             list-style: none;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.45rem;
         }
 
         .nav-item {
@@ -158,17 +166,17 @@
         .nav-link {
             display: inline-block;
             padding: 0.6rem 1rem;
-            color: var(--color-bone-200);
+            color: var(--color-soul-pale);
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.03em;
             border-radius: 6px;
             position: relative;
             transition: var(--transition-base);
         }
 
-        /* Indicador animado inferior al pasar el cursor o enfocar */
+        /* Indicador animado de Alma al pasar el cursor */
         .nav-link::after {
             content: "";
             position: absolute;
@@ -176,7 +184,7 @@
             left: 1rem;
             right: 1rem;
             height: 2px;
-            background-color: var(--color-accent-amber);
+            background: linear-gradient(90deg, var(--color-soul-blue), var(--color-essence-gold));
             transform: scaleX(0);
             transform-origin: right;
             transition: transform 0.3s ease;
@@ -184,8 +192,8 @@
 
         .nav-link:hover,
         .nav-link:focus {
-            color: var(--color-white);
-            background-color: rgba(255, 255, 255, 0.06);
+            color: var(--color-ivory);
+            background-color: rgba(142, 202, 230, 0.08);
         }
 
         .nav-link:hover::after,
@@ -206,12 +214,12 @@
             position: absolute;
             top: 100%;
             left: 0;
-            min-width: 230px;
-            background-color: var(--color-navy-900);
-            border: 1px solid var(--color-slate-700);
-            border-top: 2px solid var(--color-accent-amber);
+            min-width: 240px;
+            background-color: var(--color-hallownest-800);
+            border: 1px solid var(--color-hallownest-600);
+            border-top: 2px solid var(--color-essence-gold);
             border-radius: 0 0 var(--radius-md) var(--radius-md);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-card);
             list-style: none;
             padding: 0.5rem 0;
             opacity: 0;
@@ -222,27 +230,29 @@
 
         .dropdown-menu a {
             display: block;
-            padding: 0.6rem 1.2rem;
-            color: var(--color-bone-200);
+            padding: 0.65rem 1.2rem;
+            color: var(--color-soul-pale);
             text-decoration: none;
             font-size: 0.85rem;
             transition: background-color 0.2s ease, padding-left 0.2s ease;
         }
 
         .dropdown-menu a:hover {
-            background-color: var(--color-slate-800);
-            color: var(--color-white);
+            background-color: var(--color-hallownest-700);
+            color: var(--color-essence-gold);
             padding-left: 1.5rem;
         }
 
         .nav-cta {
-            background-color: var(--color-accent-crimson);
-            color: var(--color-white);
+            background-color: rgba(233, 196, 106, 0.14);
+            border: 1px solid var(--color-essence-gold);
+            color: var(--color-essence-gold);
             margin-left: 0.5rem;
         }
 
         .nav-cta:hover {
-            background-color: var(--color-accent-crimson-hover);
+            background-color: var(--color-essence-gold);
+            color: var(--color-abyss-950);
         }
 
         .nav-cta::after {
@@ -250,44 +260,48 @@
         }
 
         /* ==========================================================================
-           3. HERO / ENCABEZADO PRINCIPAL
+           3. HERO / PORTADA ATMOSFÉRICA DE HALLOWNEST
            ========================================================================== */
         .hero {
-            background: linear-gradient(135deg, var(--color-navy-950) 0%, var(--color-navy-900) 55%, var(--color-slate-800) 100%);
-            color: var(--color-white);
+            background:
+                radial-gradient(circle at 80% 20%, rgba(142, 202, 230, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 15% 85%, rgba(247, 127, 0, 0.1) 0%, transparent 45%),
+                linear-gradient(180deg, var(--color-abyss-900) 0%, var(--color-abyss-950) 100%);
             padding: 5.5rem 0 5rem;
-            border-bottom: 1px solid var(--color-slate-700);
+            border-bottom: 1px solid var(--color-hallownest-700);
             position: relative;
         }
 
         .hero-badge {
             display: inline-block;
-            background-color: rgba(153, 27, 27, 0.25);
-            border: 1px solid rgba(248, 113, 113, 0.4);
-            color: #fca5a5;
+            background-color: var(--color-soul-glow);
+            border: 1px solid rgba(142, 202, 230, 0.4);
+            color: var(--color-soul-blue);
             font-size: 0.78rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 0.35rem 0.9rem;
+            letter-spacing: 0.12em;
+            padding: 0.35rem 1rem;
             border-radius: 999px;
             margin-bottom: 1.5rem;
         }
 
         .hero h1 {
-            color: var(--color-white);
-            font-size: clamp(2.1rem, 4.5vw, 3.4rem);
-            max-width: 850px;
+            color: var(--color-ivory);
+            font-size: clamp(2.1rem, 4.5vw, 3.45rem);
+            max-width: 860px;
             margin-bottom: 1.25rem;
-            letter-spacing: -0.01em;
+            letter-spacing: 0.01em;
+            text-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
         }
 
         .hero-lead {
-            font-size: clamp(1.05rem, 1.8vw, 1.22rem);
-            color: var(--color-slate-400);
-            max-width: 740px;
+            font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+            color: var(--color-soul-pale);
+            max-width: 750px;
             margin-bottom: 2.25rem;
             font-weight: 300;
+            opacity: 0.92;
         }
 
         .hero-actions {
@@ -304,79 +318,156 @@
             font-size: 0.92rem;
             font-weight: 600;
             text-decoration: none;
+            letter-spacing: 0.03em;
             transition: var(--transition-base);
             cursor: pointer;
         }
 
         .btn-primary {
-            background-color: var(--color-accent-crimson);
-            color: var(--color-white);
-            border: 1px solid var(--color-accent-crimson);
+            background-color: var(--color-soul-blue);
+            color: var(--color-abyss-950);
+            border: 1px solid var(--color-soul-blue);
         }
 
         .btn-primary:hover {
-            background-color: var(--color-accent-crimson-hover);
+            background-color: var(--color-ivory);
+            border-color: var(--color-ivory);
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(153, 27, 27, 0.35);
+            box-shadow: 0 6px 22px rgba(142, 202, 230, 0.35);
         }
 
         .btn-secondary {
-            background-color: transparent;
-            color: var(--color-white);
-            border: 1px solid var(--color-slate-600);
+            background-color: rgba(20, 25, 35, 0.7);
+            color: var(--color-essence-gold);
+            border: 1px solid var(--color-essence-gold);
         }
 
         .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.08);
-            border-color: var(--color-white);
+            background-color: rgba(233, 196, 106, 0.14);
+            transform: translateY(-2px);
         }
 
-        /* Franja de indicadores académicos en el Hero */
+        /* Franja de pilares simbólicos del lore */
         .hero-metrics {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1.25rem;
             padding-top: 2.25rem;
-            border-top: 1px solid rgba(148, 163, 184, 0.2);
+            border-top: 1px solid rgba(142, 202, 230, 0.16);
         }
 
         .metric-box {
-            background-color: rgba(255, 255, 255, 0.04);
-            border-left: 3px solid var(--color-accent-amber);
-            padding: 1rem 1.25rem;
+            background-color: var(--color-hallownest-800);
+            border: 1px solid var(--color-hallownest-700);
+            border-left: 3px solid var(--color-essence-gold);
+            padding: 1.1rem 1.25rem;
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
         }
 
         .metric-value {
             font-family: var(--font-serif);
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 700;
-            color: var(--color-white);
+            color: var(--color-essence-gold);
             display: block;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.25rem;
         }
 
         .metric-desc {
-            font-size: 0.82rem;
-            color: var(--color-slate-400);
+            font-size: 0.84rem;
+            color: var(--color-muted);
+        }
+
+        /* ==========================================================================
+           3.5 INSCRIPCIÓN CEREMONIAL DEL ABISMO (CITA DEL REY PÁLIDO)
+           ========================================================================== */
+        .abyss-inscription-section {
+            padding: 3.75rem 0 1.25rem;
+            position: relative;
+        }
+
+        .inscription-monolith {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 3rem 2.25rem;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(142, 202, 230, 0.1) 0%, transparent 65%),
+                linear-gradient(180deg, rgba(17, 22, 34, 0.96) 0%, rgba(11, 14, 20, 0.99) 100%);
+            border-top: 1px solid rgba(241, 250, 238, 0.35);
+            border-bottom: 1px solid rgba(241, 250, 238, 0.35);
+            border-left: 1px solid rgba(142, 202, 230, 0.16);
+            border-right: 1px solid rgba(142, 202, 230, 0.16);
+            border-radius: var(--radius-lg);
+            box-shadow:
+                0 16px 40px rgba(0, 0, 0, 0.65),
+                inset 0 0 28px rgba(142, 202, 230, 0.06);
+            text-align: center;
+            position: relative;
+        }
+
+        .inscription-monolith::before,
+        .inscription-monolith::after {
+            content: "◆";
+            display: block;
+            font-size: 0.8rem;
+            color: var(--color-soul-blue);
+            letter-spacing: 0.3em;
+            text-shadow: 0 0 10px rgba(142, 202, 230, 0.65);
+        }
+
+        .inscription-monolith::before {
+            margin-bottom: 1.35rem;
+        }
+
+        .inscription-monolith::after {
+            margin-top: 1.5rem;
+        }
+
+        .inscription-verses {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: clamp(1.05rem, 2.1vw, 1.28rem);
+            line-height: 2.05;
+            color: var(--color-ivory);
+            text-shadow: 0 0 16px rgba(142, 202, 230, 0.22);
+            margin-bottom: 1.5rem;
+        }
+
+        .inscription-verses .verse-emphasis {
+            display: block;
+            margin-top: 0.35rem;
+            color: var(--color-soul-blue);
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .inscription-attribution {
+            display: inline-block;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--color-essence-gold);
+            padding-top: 0.85rem;
+            border-top: 1px solid rgba(233, 196, 106, 0.28);
         }
 
         /* ==========================================================================
            4. ESTRUCTURA COMÚN DE SECCIONES
            ========================================================================== */
         .section {
-            padding: 5rem 0;
+            padding: 5.25rem 0;
         }
 
         .section-alt {
-            background-color: var(--color-bone-200);
-            border-top: 1px solid var(--color-border);
-            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-hallownest-800);
+            border-top: 1px solid var(--color-hallownest-700);
+            border-bottom: 1px solid var(--color-hallownest-700);
         }
 
         .section-header {
-            max-width: 780px;
-            margin-bottom: 3rem;
+            max-width: 790px;
+            margin-bottom: 3.25rem;
         }
 
         .section-kicker {
@@ -384,19 +475,19 @@
             font-size: 0.78rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--color-accent-crimson);
+            letter-spacing: 0.14em;
+            color: var(--color-essence-gold);
             margin-bottom: 0.5rem;
         }
 
         .section-title {
-            font-size: clamp(1.75rem, 3vw, 2.35rem);
+            font-size: clamp(1.75rem, 3vw, 2.4rem);
             margin-bottom: 0.85rem;
         }
 
         .section-subtitle {
-            color: var(--color-slate-600);
-            font-size: 1.05rem;
+            color: var(--color-muted);
+            font-size: 1.04rem;
         }
 
         /* ==========================================================================
@@ -410,19 +501,19 @@
         }
 
         .info-card {
-            background-color: var(--color-white);
-            border: 1px solid var(--color-border);
-            border-top: 4px solid var(--color-navy-900);
+            background-color: var(--color-hallownest-800);
+            border: 1px solid var(--color-hallownest-700);
+            border-top: 4px solid var(--color-soul-blue);
             border-radius: var(--radius-lg);
-            padding: 1.75rem;
-            box-shadow: var(--shadow-sm);
+            padding: 1.85rem;
+            box-shadow: var(--shadow-card);
             transition: var(--transition-base);
         }
 
         .info-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-top-color: var(--color-accent-crimson);
+            box-shadow: var(--shadow-glow-soul);
+            border-color: var(--color-soul-blue);
         }
 
         .info-card-tag {
@@ -430,8 +521,8 @@
             font-size: 0.72rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--color-accent-amber);
+            letter-spacing: 0.1em;
+            color: var(--color-soul-blue);
             margin-bottom: 0.65rem;
         }
 
@@ -442,15 +533,16 @@
 
         .info-card p {
             font-size: 0.94rem;
-            color: var(--color-slate-600);
+            color: var(--color-soul-pale);
+            opacity: 0.88;
         }
 
         /* Sistema de Pestañas en CSS Puro (Radio Inputs + :checked) */
         .css-tabs-wrapper {
-            background-color: var(--color-white);
-            border: 1px solid var(--color-border);
+            background-color: var(--color-hallownest-800);
+            border: 1px solid var(--color-hallownest-600);
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-card);
             overflow: hidden;
         }
 
@@ -466,16 +558,16 @@
 
         /* Etiquetas que funcionan como botones de pestaña */
         .tab-label {
-            flex: 1 1 200px;
-            padding: 1.1rem 1.25rem;
-            background-color: var(--color-bone-200);
-            color: var(--color-slate-700);
+            flex: 1 1 210px;
+            padding: 1.15rem 1.25rem;
+            background-color: var(--color-abyss-900);
+            color: var(--color-muted);
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             text-align: center;
             cursor: pointer;
-            border-bottom: 2px solid var(--color-border);
-            border-right: 1px solid var(--color-border);
+            border-bottom: 2px solid var(--color-hallownest-700);
+            border-right: 1px solid var(--color-hallownest-700);
             transition: var(--transition-base);
             user-select: none;
         }
@@ -485,8 +577,8 @@
         }
 
         .tab-label:hover {
-            background-color: #e2e8f0;
-            color: var(--color-navy-900);
+            background-color: var(--color-hallownest-700);
+            color: var(--color-ivory);
         }
 
         /* Estilo activo cuando el radio correspondiente está marcado */
@@ -494,9 +586,9 @@
         #tab-2:checked ~ label[for="tab-2"],
         #tab-3:checked ~ label[for="tab-3"],
         #tab-4:checked ~ label[for="tab-4"] {
-            background-color: var(--color-white);
-            color: var(--color-accent-crimson);
-            border-bottom-color: var(--color-accent-crimson);
+            background-color: var(--color-hallownest-800);
+            color: var(--color-essence-gold);
+            border-bottom-color: var(--color-essence-gold);
         }
 
         /* Paneles de contenido */
@@ -504,7 +596,7 @@
             order: 99;
             width: 100%;
             display: none;
-            padding: 2.25rem;
+            padding: 2.35rem;
             animation: fadeInPanel 0.35s ease;
         }
 
@@ -521,28 +613,29 @@
         }
 
         .tab-panel h4 {
-            font-size: 1.35rem;
-            margin-bottom: 0.85rem;
-            color: var(--color-navy-900);
+            font-size: 1.38rem;
+            margin-bottom: 0.9rem;
+            color: var(--color-soul-blue);
         }
 
         .tab-panel p {
             margin-bottom: 1rem;
-            color: var(--color-slate-700);
+            color: var(--color-ivory);
+            opacity: 0.9;
             font-size: 0.96rem;
         }
 
         .tab-highlight {
-            background-color: var(--color-bone-100);
-            border-left: 4px solid var(--color-accent-amber);
+            background-color: var(--color-abyss-900);
+            border-left: 4px solid var(--color-essence-gold);
             padding: 1rem 1.25rem;
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             font-size: 0.9rem;
-            color: var(--color-slate-700);
+            color: var(--color-soul-pale);
         }
 
         /* ==========================================================================
-           6. SECCIÓN: PROBLEMAS Y CONSECUENCIAS (CSS GRID ESTRUCTURADO)
+           6. SECCIÓN: PROBLEMAS Y CONFLICTOS DE HALLOWNEST (CSS GRID)
            ========================================================================== */
         .problems-grid {
             display: grid;
@@ -551,29 +644,29 @@
         }
 
         .problem-card {
-            background-color: var(--color-white);
-            border: 1px solid var(--color-border);
+            background-color: var(--color-abyss-900);
+            border: 1px solid var(--color-hallownest-700);
+            border-top: 4px solid var(--color-infection-orange);
             border-radius: var(--radius-lg);
             padding: 2rem;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-card);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             transition: var(--transition-base);
-            position: relative;
         }
 
         .problem-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--color-slate-400);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow-infection);
+            border-color: var(--color-infection-orange);
         }
 
         .problem-number {
             font-family: var(--font-serif);
             font-size: 2rem;
             font-weight: 700;
-            color: rgba(153, 27, 27, 0.18);
+            color: rgba(247, 127, 0, 0.35);
             line-height: 1;
             margin-bottom: 0.75rem;
         }
@@ -581,66 +674,67 @@
         .problem-card h3 {
             font-size: 1.22rem;
             margin-bottom: 0.75rem;
-            color: var(--color-navy-900);
+            color: var(--color-ivory);
         }
 
         .problem-card p {
             font-size: 0.93rem;
-            color: var(--color-slate-600);
-            margin-bottom: 1.25rem;
+            color: var(--color-muted);
+            margin-bottom: 1.35rem;
         }
 
         .problem-impact {
             padding-top: 0.9rem;
-            border-top: 1px solid var(--color-bone-200);
+            border-top: 1px solid var(--color-hallownest-700);
             font-size: 0.82rem;
             font-weight: 600;
-            color: var(--color-accent-crimson);
+            color: var(--color-infection-orange);
         }
 
         /* ==========================================================================
-           7. SECCIÓN: SOLUCIONES Y ESTRATEGIAS (ACORDEONES NATIVOS <details>)
+           7. SECCIÓN: SOLUCIONES Y FINALES (ACORDEONES NATIVOS <details>)
            ========================================================================== */
         .solutions-layout {
             display: grid;
-            grid-template-columns: 1fr 1.4fr;
+            grid-template-columns: 1fr 1.45fr;
             gap: 2.5rem;
             align-items: start;
         }
 
         .solutions-intro-box {
-            background-color: var(--color-navy-900);
-            color: var(--color-white);
+            background: linear-gradient(160deg, var(--color-hallownest-800), var(--color-abyss-900));
+            color: var(--color-ivory);
             padding: 2.25rem;
             border-radius: var(--radius-lg);
-            border-top: 4px solid var(--color-accent-amber);
-            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-hallownest-600);
+            border-top: 4px solid var(--color-soul-blue);
+            box-shadow: var(--shadow-card);
         }
 
         .solutions-intro-box h3 {
-            color: var(--color-white);
+            color: var(--color-soul-blue);
             font-size: 1.4rem;
             margin-bottom: 1rem;
         }
 
         .solutions-intro-box p {
-            color: var(--color-slate-400);
+            color: var(--color-muted);
             font-size: 0.95rem;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.35rem;
         }
 
         .pillar-list {
             list-style: none;
             font-size: 0.88rem;
-            color: var(--color-bone-200);
+            color: var(--color-soul-pale);
         }
 
         .pillar-list li {
-            padding: 0.55rem 0;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(142, 202, 230, 0.14);
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.65rem;
         }
 
         .pillar-list li:last-child {
@@ -651,7 +745,8 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background-color: var(--color-accent-amber);
+            background-color: var(--color-essence-gold);
+            box-shadow: 0 0 8px var(--color-essence-gold);
             flex-shrink: 0;
         }
 
@@ -663,17 +758,17 @@
         }
 
         .accordion-item {
-            background-color: var(--color-white);
-            border: 1px solid var(--color-border);
+            background-color: var(--color-hallownest-800);
+            border: 1px solid var(--color-hallownest-700);
             border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-card);
             overflow: hidden;
             transition: var(--transition-base);
         }
 
         .accordion-item[open] {
-            border-color: var(--color-navy-900);
-            box-shadow: var(--shadow-md);
+            border-color: var(--color-soul-blue);
+            box-shadow: var(--shadow-glow-soul);
         }
 
         .accordion-summary {
@@ -682,13 +777,13 @@
             font-family: var(--font-serif);
             font-size: 1.08rem;
             font-weight: 700;
-            color: var(--color-navy-900);
+            color: var(--color-ivory);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 1rem;
-            background-color: var(--color-white);
+            background-color: var(--color-hallownest-800);
             transition: background-color 0.2s ease;
         }
 
@@ -697,14 +792,14 @@
         }
 
         .accordion-summary:hover {
-            background-color: var(--color-bone-100);
+            background-color: var(--color-hallownest-700);
         }
 
         .accordion-icon {
             font-family: var(--font-sans);
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 400;
-            color: var(--color-accent-crimson);
+            color: var(--color-essence-gold);
             transition: transform 0.3s ease;
             flex-shrink: 0;
         }
@@ -714,30 +809,35 @@
         }
 
         .accordion-content {
-            padding: 0 1.5rem 1.5rem;
-            color: var(--color-slate-600);
+            padding: 1.1rem 1.5rem 1.5rem;
+            color: var(--color-soul-pale);
             font-size: 0.94rem;
-            border-top: 1px solid var(--color-bone-200);
-            padding-top: 1rem;
+            border-top: 1px solid var(--color-hallownest-700);
+            background-color: rgba(11, 14, 20, 0.45);
         }
 
         .accordion-content ul {
             margin-top: 0.65rem;
             padding-left: 1.25rem;
+            color: var(--color-muted);
         }
 
         .accordion-content li {
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.45rem;
+        }
+
+        .accordion-content strong {
+            color: var(--color-essence-gold);
         }
 
         /* ==========================================================================
            8. FOOTER COMPLETO CON INFORMACIÓN DE CONTACTO
            ========================================================================== */
         .site-footer {
-            background-color: var(--color-navy-950);
-            color: var(--color-slate-400);
+            background-color: #07090e;
+            color: var(--color-muted);
             padding: 4.5rem 0 2rem;
-            border-top: 4px solid var(--color-accent-crimson);
+            border-top: 2px solid var(--color-hallownest-600);
         }
 
         .footer-grid {
@@ -745,19 +845,19 @@
             grid-template-columns: 1.3fr 1fr 1.2fr;
             gap: 2.5rem;
             padding-bottom: 3rem;
-            border-bottom: 1px solid var(--color-slate-800);
+            border-bottom: 1px solid var(--color-hallownest-700);
         }
 
         .footer-col h3 {
-            color: var(--color-white);
+            color: var(--color-ivory);
             font-size: 1.15rem;
             margin-bottom: 1.1rem;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.04em;
         }
 
         .footer-about p {
             font-size: 0.9rem;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.15rem;
             line-height: 1.7;
         }
 
@@ -770,7 +870,7 @@
         }
 
         .footer-links a {
-            color: var(--color-slate-400);
+            color: var(--color-soul-pale);
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.2s ease, padding-left 0.2s ease;
@@ -778,14 +878,14 @@
         }
 
         .footer-links a:hover {
-            color: var(--color-white);
-            padding-left: 5px;
+            color: var(--color-essence-gold);
+            padding-left: 6px;
         }
 
-        /* Tarjeta de Contacto Editable / Lista para personalizar */
+        /* Tarjeta de Contacto personalizable */
         .contact-card {
-            background-color: var(--color-navy-900);
-            border: 1px solid var(--color-slate-800);
+            background-color: var(--color-hallownest-800);
+            border: 1px solid var(--color-hallownest-600);
             border-radius: var(--radius-md);
             padding: 1.5rem;
         }
@@ -796,7 +896,7 @@
         }
 
         .contact-list li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.8rem;
             display: flex;
             flex-direction: column;
         }
@@ -804,18 +904,19 @@
         .contact-label {
             font-size: 0.72rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--color-accent-amber);
+            letter-spacing: 0.09em;
+            color: var(--color-soul-blue);
             font-weight: 700;
         }
 
         .contact-value {
-            color: var(--color-bone-100);
+            color: var(--color-ivory);
             text-decoration: none;
             word-break: break-word;
         }
 
         .contact-value:hover {
+            color: var(--color-essence-gold);
             text-decoration: underline;
         }
 
@@ -828,20 +929,21 @@
 
         .social-pill {
             display: inline-block;
-            padding: 0.4rem 0.85rem;
-            background-color: var(--color-slate-800);
-            color: var(--color-bone-200);
+            padding: 0.4rem 0.9rem;
+            background-color: var(--color-abyss-900);
+            color: var(--color-soul-pale);
             text-decoration: none;
             font-size: 0.8rem;
             border-radius: 999px;
-            border: 1px solid var(--color-slate-700);
+            border: 1px solid var(--color-hallownest-600);
             transition: var(--transition-base);
         }
 
         .social-pill:hover {
-            background-color: var(--color-accent-crimson);
-            border-color: var(--color-accent-crimson);
-            color: var(--color-white);
+            background-color: var(--color-soul-blue);
+            border-color: var(--color-soul-blue);
+            color: var(--color-abyss-950);
+            font-weight: 600;
         }
 
         .footer-bottom {
@@ -855,18 +957,18 @@
         }
 
         .back-top-link {
-            color: var(--color-bone-200);
+            color: var(--color-essence-gold);
             text-decoration: none;
             font-weight: 600;
-            padding: 0.45rem 0.9rem;
-            border: 1px solid var(--color-slate-700);
+            padding: 0.45rem 0.95rem;
+            border: 1px solid var(--color-hallownest-600);
             border-radius: 6px;
             transition: var(--transition-base);
         }
 
         .back-top-link:hover {
-            background-color: var(--color-slate-800);
-            border-color: var(--color-white);
+            background-color: var(--color-hallownest-800);
+            border-color: var(--color-essence-gold);
         }
 
         /* ==========================================================================
@@ -889,15 +991,15 @@
 
             .nav-menu {
                 position: absolute;
-                top: 74px;
+                top: 76px;
                 left: 0;
                 right: 0;
-                background-color: var(--color-navy-900);
+                background-color: var(--color-hallownest-800);
                 flex-direction: column;
                 align-items: stretch;
                 padding: 1rem 1.5rem 1.5rem;
-                border-bottom: 2px solid var(--color-accent-crimson);
-                box-shadow: var(--shadow-lg);
+                border-bottom: 2px solid var(--color-essence-gold);
+                box-shadow: var(--shadow-card);
                 display: none;
             }
 
@@ -929,7 +1031,7 @@
                 transform: none;
                 box-shadow: none;
                 border: none;
-                border-left: 2px solid var(--color-accent-amber);
+                border-left: 2px solid var(--color-essence-gold);
                 margin-left: 0.75rem;
                 padding: 0.25rem 0;
                 background-color: transparent;
@@ -960,8 +1062,8 @@
     <header class="site-header">
         <div class="container navbar">
             <a href="#inicio" class="brand">
-                <span class="brand-title">Observatorio de Seguridad</span>
-                <span class="brand-subtitle">Análisis Académico del Terrorismo</span>
+                <span class="brand-title">Crónicas de Hallownest</span>
+                <span class="brand-subtitle">Archivo Histórico de Hollow Knight</span>
             </a>
 
             <!-- Control hamburguesa sin JavaScript -->
@@ -980,8 +1082,8 @@
                 <li class="nav-item has-dropdown">
                     <a href="#informacion-basica" class="nav-link">Información Básica ▾</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#informacion-basica">Definición y Elementos</a></li>
-                        <li><a href="#explorador-historico">Evolución Histórica</a></li>
+                        <li><a href="#informacion-basica">El Reino y el Caballero</a></li>
+                        <li><a href="#cronologia-hallownest">Cronología de Hallownest</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -998,33 +1100,33 @@
     </header>
 
     <!-- ======================================================================
-         HERO / ENCABEZADO PRINCIPAL
+         HERO / PORTADA ATMOSFÉRICA DE HALLOWNEST
          ====================================================================== -->
     <section class="hero">
         <div class="container">
-            <span class="hero-badge">Ciencias Políticas · Sociología · Derecho Internacional</span>
-            <h1>El Terrorismo: Comprensión Estructural, Desafíos y Respuestas Globales</h1>
+            <span class="hero-badge">Alma · Vacío · Esencia · Sueños</span>
+            <h1>Historia y Lore de Hollow Knight: El Auge y Caída de Hallownest</h1>
             <p class="hero-lead">
-                Un análisis objetivo sobre los fundamentos conceptuales de la violencia política asimétrica, las problemáticas humanitarias e institucionales que genera y las estrategias multilaterales diseñadas para su prevención.
+                Adéntrate en las profundidades de un reino subterráneo olvidado. Descubre el pacto entre la Luz y el Vacío, la tragedia del Rey Pálido, la plaga de El Destello y los destinos que aguardan al pequeño Caballero.
             </p>
 
             <div class="hero-actions">
-                <a href="#informacion-basica" class="btn btn-primary">Explorar Información Básica</a>
-                <a href="#soluciones" class="btn btn-secondary">Ver Estrategias y Soluciones</a>
+                <a href="#informacion-basica" class="btn btn-primary">Explorar el Lore</a>
+                <a href="#soluciones" class="btn btn-secondary">Descubrir los Finales</a>
             </div>
 
             <div class="hero-metrics">
                 <div class="metric-box">
-                    <span class="metric-value">19 Convenios</span>
-                    <span class="metric-desc">Instrumentos jurídicos universales de la ONU contra actos terroristas.</span>
+                    <span class="metric-value">El Reino Eterno</span>
+                    <span class="metric-desc">Fundado por el Rey Pálido tras otorgar mente y voluntad a los insectos.</span>
                 </div>
                 <div class="metric-box">
-                    <span class="metric-value">4 Pilares</span>
-                    <span class="metric-desc">Estrategia Global de las Naciones Unidas aprobada por consenso.</span>
+                    <span class="metric-value">Los 3 Soñadores</span>
+                    <span class="metric-desc">Monomon, Lurien y Herrah sellaron el Templo del Huevo Negro.</span>
                 </div>
                 <div class="metric-box">
-                    <span class="metric-value">Enfoque Integral</span>
-                    <span class="metric-desc">Equilibrio entre seguridad nacional, prevención social y Derechos Humanos.</span>
+                    <span class="metric-value">Múltiples Destinos</span>
+                    <span class="metric-desc">Desde perpetuar el sello hasta erradicar la Infección en los sueños.</span>
                 </div>
             </div>
         </div>
@@ -1032,104 +1134,134 @@
 
     <main>
         <!-- ==================================================================
+             INSCRIPCIÓN CEREMONIAL DEL ABISMO (CITA DEL REY PÁLIDO)
+             ================================================================== -->
+        <section class="abyss-inscription-section" aria-label="Inscripción del Rey Pálido en el Abismo">
+            <div class="container">
+                <figure class="inscription-monolith">
+                    <blockquote class="inscription-verses">
+                        No hay precio tan alto<br>
+                        Sin mente para pensar<br>
+                        Sin voluntad que quebrar<br>
+                        Sin voz que grite de sufrimiento<br>
+                        Nacido del Dios y el Vacío.<br>
+                        Sellarás la luz cegadora que asola sus sueños<br>
+                        <span class="verse-emphasis">Tú eres el receptáculo<br>
+                        Tú eres el Hollow Knight.</span>
+                    </blockquote>
+                    <figcaption class="inscription-attribution">— Rey Pálido · El Abismo —</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- ==================================================================
              SECCIÓN 1: INFORMACIÓN BÁSICA (TARJETAS + PESTAÑAS CSS PURO)
              ================================================================== -->
         <section id="informacion-basica" class="section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-kicker">01 · Fundamentos Conceptuales</span>
-                    <h2 class="section-title">Información Básica sobre el Terrorismo</h2>
+                    <span class="section-kicker">01 · Fundamentos del Mundo</span>
+                    <h2 class="section-title">Información Básica de Hallownest</h2>
                     <p class="section-subtitle">
-                        Desde la perspectiva académica y jurídica, el terrorismo se estudia como una táctica de violencia asimétrica orientada a producir un impacto psicológico y político que trasciende a las víctimas directas.
+                        Antes de descender a Bocasucia y explorar las cavernas del subsuelo, es esencial comprender los pilares narrativos que sostienen la historia del reino.
                     </p>
                 </div>
 
-                <!-- Tarjetas de pilares conceptuales -->
+                <!-- Tarjetas de pilares narrativos -->
                 <div class="info-cards-grid">
                     <article class="info-card">
-                        <span class="info-card-tag">Definición Académica</span>
-                        <h3>Naturaleza Instrumental</h3>
+                        <span class="info-card-tag">El Escenario</span>
+                        <h3>El Reino de Hallownest</h3>
                         <p>
-                            Consiste en el uso premeditado o la amenaza de violencia contra población civil o infraestructura no combatiente, con el fin de coaccionar a gobiernos, intimidar a la sociedad o imponer agendas ideológicas, políticas o religiosas.
+                            Una vasta civilización subterránea de insectos que alcanzó un esplendor arquitectónico y cultural sin precedentes bajo el mandato del Rey Pálido, hoy reducida a ruinas habitadas por cáscaras errantes.
                         </p>
                     </article>
 
                     <article class="info-card">
-                        <span class="info-card-tag">Características Clave</span>
-                        <h3>Asimetría y Clandestinidad</h3>
+                        <span class="info-card-tag">El Protagonista</span>
+                        <h3>El Caballero (The Knight)</h3>
                         <p>
-                            A diferencia de la guerra convencional, los actores terroristas operan de forma clandestina o en red, evitando el enfrentamiento militar directo y buscando maximizar la visibilidad mediática de cada acción.
+                            Un pequeño viajero silencioso con máscara blanca y aguijón desgastado que regresa desde los páramos exteriores, atraído por el llamado de una vasija imperfecta encerrada en el corazón del reino.
                         </p>
                     </article>
 
                     <article class="info-card">
-                        <span class="info-card-tag">Marco Jurídico</span>
-                        <h3>Derecho Internacional</h3>
+                        <span class="info-card-tag">Fuerzas Primordiales</span>
+                        <h3>Alma, Esencia y Vacío</h3>
                         <p>
-                            El Derecho Internacional Humanitario (Convenios de Ginebra) prohíbe de manera absoluta los ataques contra civiles y los actos destinados a sembrar el terror entre la población en cualquier contexto.
+                            El universo de Hollow Knight se rige por fuerzas ancestrales: el <strong>Alma</strong> que anima a los seres vivos, la <strong>Esencia</strong> nacida de los sueños y recuerdos, y el <strong>Vacío</strong>, una sustancia oscura que yace en el Abismo.
                         </p>
                     </article>
                 </div>
 
-                <!-- Pestañas Interactivas en CSS Puro (Contexto Histórico y Tipologías) -->
-                <div id="explorador-historico" class="css-tabs-wrapper">
+                <!-- Pestañas Interactivas en CSS Puro (Cronología de 4 etapas) -->
+                <div id="cronologia-hallownest" class="css-tabs-wrapper">
                     <div class="tabs-container">
-                        <input type="radio" name="info-tabs" id="tab-1" class="tab-radio" checked>
-                        <label for="tab-1" class="tab-label">1. Origen del Término</label>
+                        <input type="radio" name="lore-tabs" id="tab-1" class="tab-radio" checked>
+                        <label for="tab-1" class="tab-label">1. Antes de Hallownest</label>
 
-                        <input type="radio" name="info-tabs" id="tab-2" class="tab-radio">
-                        <label for="tab-2" class="tab-label">2. Olas Modernas (XIX–XX)</label>
+                        <input type="radio" name="lore-tabs" id="tab-2" class="tab-radio">
+                        <label for="tab-2" class="tab-label">2. El Reinado Pálido</label>
 
-                        <input type="radio" name="info-tabs" id="tab-3" class="tab-radio">
-                        <label for="tab-3" class="tab-label">3. Era Contemporánea</label>
+                        <input type="radio" name="lore-tabs" id="tab-3" class="tab-radio">
+                        <label for="tab-3" class="tab-label">3. Infección y Vasijas</label>
 
-                        <input type="radio" name="info-tabs" id="tab-4" class="tab-radio">
-                        <label for="tab-4" class="tab-label">4. Tipologías Principales</label>
+                        <input type="radio" name="lore-tabs" id="tab-4" class="tab-radio">
+                        <label for="tab-4" class="tab-label">4. El Despertar y Soñadores</label>
 
                         <!-- Panel 1 -->
                         <div id="panel-1" class="tab-panel">
-                            <h4>Origen Histórico del Concepto</h4>
+                            <h4>Antes de Hallownest: Los Seres Superiores y El Destello</h4>
                             <p>
-                                El término «terrorismo» ingresó al léxico político moderno durante la Revolución Francesa (1793–1794), asociado al <em>Régimen del Terror</em> jacobino, cuando el Estado empleó medidas coercitivas extremas para consolidar el orden revolucionario.
+                                En la era primordial, las tierras subterráneas estaban dominadas por seres superiores y tribus independientes. Entre ellos destacaba <strong>El Destello (The Radiance)</strong>, una deidad ancestral de luz y sueños que creó a la tribu de las Polillas y gobernaba las mentes de sus seguidores mediante una mente colmena.
                             </p>
                             <p>
-                                A finales del siglo XIX, el significado evolucionó para describir a grupos clandestinos no estatales que utilizaban atentados contra figuras políticas como método de propaganda revolucionaria.
+                                Mientras tanto, en lo más profundo de la tierra dormía el Abismo, hogar de una antigua civilización que adoraba al Vacío puro antes de desaparecer sin dejar rastro.
                             </p>
                             <div class="tab-highlight">
-                                <strong>Dato clave:</strong> El concepto pasó de designar la coerción ejercida desde el poder estatal a identificar principalmente tácticas insurgentes y asimétricas contra el Estado y la sociedad civil.
+                                <strong>Clave del Lore:</strong> El Destello existía a través de la memoria y la devoción de quienes la recordaban en sus sueños.
                             </div>
                         </div>
 
                         <!-- Panel 2 -->
                         <div id="panel-2" class="tab-panel">
-                            <h4>Las Olas Históricas del Terrorismo Moderno</h4>
+                            <h4>El Reinado del Rey Pálido</h4>
                             <p>
-                                Según el politólogo David Rapoport, el terrorismo moderno atravesó tres grandes ciclos entre 1880 y 1980: la <strong>ola anarquista</strong> (magnicidios políticos impulsados por el telégrafo y la dinamita), la <strong>ola anticolonial</strong> (movimientos de independencia tras las guerras mundiales) y la <strong>ola de la Nueva Izquierda</strong> (secuestros aéreos y grupos urbanos durante la Guerra Fría).
+                                Un antiguo Wyrm viajó hasta estas tierras, mudó su colosal cuerpo en el Límite del Reino y renació con una forma pequeña y luminosa: el <strong>Rey Pálido</strong>. Junto a la Dama Blanca, fundó Hallownest y otorgó libre albedrío, conciencia e intelecto individual a los insectos del subsuelo.
+                            </p>
+                            <p>
+                                Cautivadas por la luz y la razón del nuevo monarca, incluso las polillas abandonaron el culto a El Destello, condenando a la antigua deidad de los sueños al olvido casi total.
                             </p>
                             <div class="tab-highlight">
-                                <strong>Factor tecnológico:</strong> Cada ciclo histórico estuvo estrechamente vinculado a los avances en transporte y medios de comunicación de masas de su época.
+                                <strong>La promesa del Rey:</strong> «Ningún costo es demasiado grande» para preservar un reino eterno libre de instintos salvajes.
                             </div>
                         </div>
 
                         <!-- Panel 3 -->
                         <div id="panel-3" class="tab-panel">
-                            <h4>Transformaciones en el Siglo XXI</h4>
+                            <h4>El Surgimiento de la Infección y las Vasijas</h4>
                             <p>
-                                A partir de finales del siglo XX y comienzos del XXI, emergieron redes transnacionales descentralizadas con motivaciones religiosas extremistas, así como fenómenos contemporáneos caracterizados por actores individuales autorradicalizados en entornos digitales y ataques contra infraestructuras críticas.
+                                Negándose a desaparecer, El Destello comenzó a manifestarse en los sueños de los habitantes de Hallownest como una luz cegadora y naranja: <strong>la Infección</strong>. Quienes sucumbían perdían su libre albedrío y eran consumidos por una furia rabiosa.
+                            </p>
+                            <p>
+                                Desesperado, el Rey Pálido descendió al Abismo y creó miles de <strong>Vasijas</strong>: seres nacidos del Rey y la Dama Blanca, pero vaciados por el Vacío para carecer de mente, voluntad o voz, diseñadas para encerrar a El Destello sin poder ser corrompidas.
                             </p>
                             <div class="tab-highlight">
-                                <strong>Tendencia actual:</strong> Menor dependencia de estructuras jerárquicas rígidas y mayor uso de plataformas encriptadas y propaganda algorítmica.
+                                <strong>La selección trágica:</strong> Solo una criatura fue elegida como la Vasija Pura —el <em>Hollow Knight</em>— mientras miles de hermanos fueron sellados en el Abismo.
                             </div>
                         </div>
 
                         <!-- Panel 4 -->
                         <div id="panel-4" class="tab-panel">
-                            <h4>Clasificación Analítica por Motivación y Medio</h4>
+                            <h4>El Despertar del Caballero y los Soñadores</h4>
                             <p>
-                                En ciencias políticas y estudios de seguridad se distinguen diversas categorías: <strong>terrorismo nacionalista o separatista</strong> (reivindicaciones territoriales), <strong>ideológico</strong> (extrema izquierda o extrema derecha), <strong>religioso</strong> (fundamentalismo violento), <strong>terrorismo de Estado</strong> y amenazas emergentes como el <strong>ciberterrorismo</strong> y el <strong>bioterrorismo (QBRN)</strong>.
+                                Para asegurar que El Destello jamás escapara del interior del <em>Hollow Knight</em>, tres figuras notables aceptaron caer en un sueño eterno y convertirse en los <strong>Soñadores</strong>: <strong>Lurien</strong> el Vigilante, <strong>Monomon</strong> la Maestra y <strong>Herrah</strong> la Bestia, sellando la entrada del Templo del Huevo Negro.
+                            </p>
+                            <p>
+                                Sin embargo, con el paso del tiempo, la Infección volvió a filtrarse desde el templo. Es entonces cuando <strong>El Caballero</strong>, una vasija que logró escapar del Abismo, regresa a Hallownest para romper los sellos y confrontar el destino del reino.
                             </p>
                             <div class="tab-highlight">
-                                <strong>Importancia taxonómica:</strong> Identificar la naturaleza de cada grupo permite diseñar políticas públicas y respuestas legales proporcionales y eficaces.
+                                <strong>El llamado silencioso:</strong> Las grietas en la coraza del Hollow Knight resonaron hasta los páramos exteriores, trayendo de vuelta al protagonista.
                             </div>
                         </div>
                     </div>
@@ -1138,15 +1270,15 @@
         </section>
 
         <!-- ==================================================================
-             SECCIÓN 2: PROBLEMAS Y CONSECUENCIAS (CSS GRID)
+             SECCIÓN 2: PROBLEMAS Y CONFLICTOS DE HALLOWNEST (CSS GRID)
              ================================================================== -->
         <section id="problemas" class="section section-alt">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-kicker">02 · Diagnóstico y Riesgos</span>
-                    <h2 class="section-title">Principales Problemas y Consecuencias</h2>
+                    <span class="section-kicker">02 · La Ruina del Reino</span>
+                    <h2 class="section-title">Problemas y Conflictos de Hallownest</h2>
                     <p class="section-subtitle">
-                        El fenómeno terrorista desencadena efectos multidimensionales que afectan la seguridad humana, la estabilidad económica y la calidad de las instituciones democráticas.
+                        La caída del reino eterno no fue producto de una sola batalla, sino de una cadena de tragedias, errores de cálculo y conflictos irresueltos entre deidades y mortales.
                     </p>
                 </div>
 
@@ -1155,78 +1287,78 @@
                     <article class="problem-card">
                         <div>
                             <div class="problem-number">01</div>
-                            <h3>Impacto Humanitario y Trauma Social</h3>
+                            <h3>La Infección de El Destello</h3>
                             <p>
-                                Pérdida de vidas civiles, lesiones permanentes, desplazamiento forzado de comunidades enteras y secuelas psicológicas colectivas que erosionan la confianza interpersonal y la cohesión social.
+                                Una plaga psíquica que ataca directamente la mente a través de los sueños. Quienes intentan resistirla sufren una agonía creciente hasta que sus cuerpos se hinchan de luz naranja y pierden toda conciencia propia.
                             </p>
                         </div>
-                        <div class="problem-impact">Consecuencia: Crisis de desplazamiento y estrés postraumático colectivo</div>
+                        <div class="problem-impact">Consecuencia: Colapso total de la sociedad y locura colectiva</div>
                     </article>
 
                     <!-- Problema 2 -->
                     <article class="problem-card">
                         <div>
                             <div class="problem-number">02</div>
-                            <h3>Radicalización en Entornos Digitales</h3>
+                            <h3>La Imperfección del Hollow Knight</h3>
                             <p>
-                                Uso de redes sociales, foros encriptados y algoritmos de recomendación para difundir narrativas polarizantes, captar jóvenes vulnerables y fomentar ataques de actores solitarios difíciles de detectar.
+                                El plan del Rey Pálido exigía una vasija completamente hueca, sin sentimientos ni pensamientos. Sin embargo, un breve momento de vínculo afectivo entre el Rey y su elegido «mancilló» la vasija con una idea inculcada.
                             </p>
                         </div>
-                        <div class="problem-impact">Consecuencia: Captación transfronteriza y aceleración del extremismo</div>
+                        <div class="problem-impact">Consecuencia: El Destello explotó esa grieta emocional para escapar</div>
                     </article>
 
                     <!-- Problema 3 -->
                     <article class="problem-card">
                         <div>
                             <div class="problem-number">03</div>
-                            <h3>Financiamiento Ilícito y Economías Criminales</h3>
+                            <h3>La Desaparición del Rey Pálido</h3>
                             <p>
-                                Convergencia entre redes terroristas y crimen organizado mediante extorsión, tráfico ilícito, lavado de activos, empresas fachada y transferencia opaca de recursos financieros.
+                                Consumido por la culpa del sacrificio de sus hijos y el fracaso de su sello, el Rey Pálido trasladó su Palacio Blanco al Reino de los Sueños y desapareció, dejando a sus súbditos sin liderazgo ni esperanza.
                             </p>
                         </div>
-                        <div class="problem-impact">Consecuencia: Corrupción institucional y distorsión de mercados</div>
+                        <div class="problem-impact">Consecuencia: Vacío de poder y abandono de la Ciudad de Lágrimas</div>
                     </article>
 
                     <!-- Problema 4 -->
                     <article class="problem-card">
                         <div>
                             <div class="problem-number">04</div>
-                            <h3>Desestabilización Institucional y Polarización</h3>
+                            <h3>Fragmentación de las Tribus</h3>
                             <p>
-                                Debilitamiento de la gobernabilidad en Estados frágiles y riesgo de respuestas desproporcionadas en democracias que pueden restringir libertades civiles o estigmatizar minorías.
+                                Las antiguas civilizaciones del subsuelo se aislaron o sucumbieron: los Señores Mantis cerraron sus puertas al reino, las Tejedoras huyeron de Nido Profundo y la Colmena selló sus accesos dejando morir a su reina.
                             </p>
                         </div>
-                        <div class="problem-impact">Consecuencia: Tensión entre seguridad pública y Estado de derecho</div>
+                        <div class="problem-impact">Consecuencia: Ruptura de alianzas y aislamiento de los supervivientes</div>
                     </article>
                 </div>
             </div>
         </section>
 
         <!-- ==================================================================
-             SECCIÓN 3: SOLUCIONES Y ESTRATEGIAS (ACORDEONES INTERACTIVOS CSS)
+             SECCIÓN 3: SOLUCIONES Y FINALES (ACORDEONES INTERACTIVOS CSS)
              ================================================================== -->
         <section id="soluciones" class="section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-kicker">03 · Respuestas Multilaterales y Preventivas</span>
-                    <h2 class="section-title">Soluciones y Estrategias de Prevención</h2>
+                    <span class="section-kicker">03 · Los Caminos del Caballero</span>
+                    <h2 class="section-title">Soluciones y Finales para Salvar el Reino</h2>
                     <p class="section-subtitle">
-                        La experiencia internacional demuestra que la fuerza policial o militar por sí sola es insuficiente; se requiere una arquitectura integral basada en prevención, inteligencia, cooperación y respeto a los Derechos Humanos.
+                        A lo largo de su travesía, El Caballero descubre distintas formas de resolver la crisis de Hallownest, dependiendo de cuánto profundice en los recuerdos ocultos del Abismo y el Reino de los Sueños.
                     </p>
                 </div>
 
                 <div class="solutions-layout">
-                    <!-- Columna izquierda: Marco estratégico -->
+                    <!-- Columna izquierda: Resumen de requisitos narrativos -->
                     <aside class="solutions-intro-box">
-                        <h3>Estrategia Global de la ONU</h3>
+                        <h3>Las Llaves del Destino</h3>
                         <p>
-                            Aprobada por la Asamblea General (Resolución 60/288), establece que la lucha eficaz contra el terrorismo exige abordar tanto sus manifestaciones operativas como sus causas estructurales.
+                            Romper los sellos de los tres Soñadores abre el Templo del Huevo Negro, pero alcanzar la verdadera solución requiere despertar el Aguijón Onírico y unir el Vacío.
                         </p>
                         <ul class="pillar-list">
-                            <li><span class="pillar-dot"></span> Abordar condiciones propicias al extremismo</li>
-                            <li><span class="pillar-dot"></span> Prevenir y combatir redes operativas</li>
-                            <li><span class="pillar-dot"></span> Fortalecer la capacidad institucional estatal</li>
-                            <li><span class="pillar-dot"></span> Garantizar los Derechos Humanos y la legalidad</li>
+                            <li><span class="pillar-dot"></span> Derrotar a Lurien, Monomon y Herrah</li>
+                            <li><span class="pillar-dot"></span> Obtener el Alma del Rey en el Palacio Blanco</li>
+                            <li><span class="pillar-dot"></span> Recordar el origen en el fondo del Abismo</li>
+                            <li><span class="pillar-dot"></span> Unificar el Vacío con el Corazón del Vacío</li>
                         </ul>
                     </aside>
 
@@ -1234,85 +1366,68 @@
                     <div class="accordion-group">
                         <details class="accordion-item" open>
                             <summary class="accordion-summary">
-                                <span>1. Prevención del Extremismo Violento y Educación Cívica</span>
+                                <span>1. El Caballero Hueco (Perpetuar el Sello)</span>
                                 <span class="accordion-icon">+</span>
                             </summary>
                             <div class="accordion-content">
                                 <p>
-                                    Consiste en intervenir antes de que los individuos adopten la violencia mediante políticas sociales inclusivas y fortalecimiento del pensamiento crítico:
+                                    Es la solución inicial diseñada originalmente por el Rey Pálido para contener la plaga:
                                 </p>
                                 <ul>
-                                    <li>Programas escolares de alfabetización mediática para identificar desinformación y propaganda extremista.</li>
-                                    <li>Inclusión socioeconómica y oportunidades laborales para juventudes en zonas vulnerables.</li>
-                                    <li>Diálogo intercultural y participación de líderes comunitarios y familias en la detección temprana.</li>
+                                    <li><strong>Acción:</strong> Tras derrotar a los tres Soñadores, El Caballero entra al Templo del Huevo Negro y vence a la Vasija Pura corrompida.</li>
+                                    <li><strong>Desenlace:</strong> El protagonista absorbe la Infección en su propio interior y queda encadenado dentro del templo, convirtiéndose en el nuevo recipiente.</li>
+                                    <li><strong>Implicación:</strong> Es una solución temporal; el ciclo de contención se repite sin destruir la raíz del problema.</li>
                                 </ul>
                             </div>
                         </details>
 
                         <details class="accordion-item">
                             <summary class="accordion-summary">
-                                <span>2. Inteligencia Financiera y Control de Activos Ilícitos</span>
+                                <span>2. Hermanos Sellados (El Sacrificio de Hornet)</span>
                                 <span class="accordion-icon">+</span>
                             </summary>
                             <div class="accordion-content">
                                 <p>
-                                    Bloquear el flujo económico que sostiene el reclutamiento, la logística y la adquisición de armamento:
+                                    Ocurre cuando El Caballero obtiene el <strong>Corazón del Vacío</strong>, pero decide no utilizar el Aguijón Onírico para entrar en la mente del Hollow Knight:
                                 </p>
                                 <ul>
-                                    <li>Aplicación de las recomendaciones del Grupo de Acción Financiera Internacional (GAFI).</li>
-                                    <li>Supervisión bancaria, trazabilidad de transacciones sospechosas y congelamiento judicial de fondos.</li>
-                                    <li>Cooperación entre Unidades de Inteligencia Financiera (UIF) a nivel regional y global.</li>
+                                    <li><strong>Acción:</strong> Hornet irrumpe en el combate para inmovilizar al Hollow Knight, permitiendo al protagonista absorber la Infección.</li>
+                                    <li><strong>Desenlace:</strong> Al quedar encerrada dentro del Templo del Huevo Negro sellado, Hornet queda atrapada eternamente como una nueva Soñadora junto a su medio hermano.</li>
+                                    <li><strong>Implicación:</strong> Aunque el sello parece más fuerte, la presencia de Hornet dentro del templo implica un destino trágico para la protectora de Hallownest.</li>
                                 </ul>
                             </div>
                         </details>
 
                         <details class="accordion-item">
                             <summary class="accordion-summary">
-                                <span>3. Cooperación Internacional e Intercambio de Inteligencia</span>
+                                <span>3. No Más Sueños (Erradicar a El Destello)</span>
                                 <span class="accordion-icon">+</span>
                             </summary>
                             <div class="accordion-content">
                                 <p>
-                                    Dado el carácter transnacional de las redes actuales, ningún Estado puede afrontar el fenómeno de forma aislada:
+                                    La verdadera resolución narrativa del conflicto mediante el dominio del Vacío y los sueños:
                                 </p>
                                 <ul>
-                                    <li>Coordinación policial y judicial a través de INTERPOL, EUROPOL y organismos regionales.</li>
-                                    <li>Control fronterizo inteligente y verificación biométrica respetando la privacidad y el derecho de asilo.</li>
-                                    <li>Tratados de extradición y asistencia legal mutua para evitar la impunidad transfronteriza.</li>
+                                    <li><strong>Acción:</strong> Cuando Hornet retiene al Hollow Knight, El Caballero golpea al jefe con el <strong>Aguijón Onírico Despertado</strong>, accediendo directamente al plano mental donde reside El Destello.</li>
+                                    <li><strong>Desenlace:</strong> Con la ayuda de las sombras de todas sus hermanas vasijas y el propio Hollow Knight, El Caballero desgarra a El Destello y lo consume en el Vacío.</li>
+                                    <li><strong>Implicación:</strong> La Infección desaparece por completo de Hallownest, liberando al reino de la plaga y otorgando descanso eterno a las vasijas.</li>
                                 </ul>
                             </div>
                         </details>
 
                         <details class="accordion-item">
                             <summary class="accordion-summary">
-                                <span>4. Programas de Desradicalización y Reinserción Social</span>
+                                <span>4. Abrazar el Vacío (Ascensión en Hogar de Dioses)</span>
                                 <span class="accordion-icon">+</span>
                             </summary>
                             <div class="accordion-content">
                                 <p>
-                                    Intervenciones especializadas destinadas a desvincular a personas involucradas en grupos extremistas y reducir la reincidencia:
+                                    El desenlace más trascendental introducido en la expansión <em>Buscador de Dioses</em>:
                                 </p>
                                 <ul>
-                                    <li>Acompañamiento psicológico, mentoría ideológica y capacitación profesional en centros penitenciarios.</li>
-                                    <li>Redes de apoyo familiar y seguimiento comunitario tras el cumplimiento de penas judiciales.</li>
-                                    <li>Protección y reparación integral para las víctimas del terrorismo como voz legítima de paz.</li>
-                                </ul>
-                            </div>
-                        </details>
-
-                        <details class="accordion-item">
-                            <summary class="accordion-summary">
-                                <span>5. Ciberseguridad y Protección de Infraestructuras Críticas</span>
-                                <span class="accordion-icon">+</span>
-                            </summary>
-                            <div class="accordion-content">
-                                <p>
-                                    Resguardo de los sistemas esenciales para el funcionamiento de la sociedad moderna frente a sabotajes físicos o digitales:
-                                </p>
-                                <ul>
-                                    <li>Blindaje informático de redes eléctricas, hospitales, sistemas financieros y transporte.</li>
-                                    <li>Alianzas público-privadas con plataformas tecnológicas para retirar contenido que incite a la violencia.</li>
-                                    <li>Protocolos nacionales de resiliencia y respuesta rápida ante emergencias.</li>
+                                    <li><strong>Acción:</strong> Tras superar los Panteones y derrotar al <strong>Destello Absoluto</strong> en la cima de Hogar de Dioses, El Caballero canaliza todo el poder del Vacío unificado.</li>
+                                    <li><strong>Desenlace:</strong> El protagonista asciende como el <em>Señor de las Sombras</em>, destruyendo por completo a la deidad de la luz desde el reino onírico de los Buscadores de Dioses.</li>
+                                    <li><strong>Implicación:</strong> La Infección se desvanece en Hallownest sin que El Caballero deba sacrificarse en el Templo del Huevo Negro, liberando incluso al Hollow Knight original.</li>
                                 </ul>
                             </div>
                         </details>
@@ -1330,24 +1445,24 @@
             <div class="footer-grid">
                 <!-- Columna 1: Propósito del sitio -->
                 <div class="footer-col footer-about">
-                    <h3>Observatorio de Seguridad</h3>
+                    <h3>Crónicas de Hallownest</h3>
                     <p>
-                        Sitio web educativo e informativo dedicado al análisis riguroso del terrorismo desde las ciencias sociales, las relaciones internacionales y la prevención cívica.
+                        Sitio web dedicado a recopilar y estructurar la historia, mitología y finales de <em>Hollow Knight</em>, obra maestra desarrollada por Team Cherry.
                     </p>
                     <p>
-                        Desarrollado exclusivamente con estándares web nativos (HTML5 y CSS3 puro) para garantizar accesibilidad, velocidad y claridad documental.
+                        Construido exclusivamente con HTML5 y CSS3 puro en un único archivo autocontenido, inspirado en la estética subterránea del reino.
                     </p>
                 </div>
 
                 <!-- Columna 2: Navegación rápida -->
                 <div class="footer-col">
-                    <h3>Mapa del Sitio</h3>
+                    <h3>Mapa de Exploración</h3>
                     <ul class="footer-links">
-                        <li><a href="#inicio">Inicio y Resumen Ejecutivo</a></li>
-                        <li><a href="#informacion-basica">Información Básica y Definición</a></li>
-                        <li><a href="#explorador-historico">Contexto Histórico y Tipologías</a></li>
-                        <li><a href="#problemas">Problemas y Consecuencias</a></li>
-                        <li><a href="#soluciones">Soluciones y Estrategias ONU</a></li>
+                        <li><a href="#inicio">Inicio y Resumen de Hallownest</a></li>
+                        <li><a href="#informacion-basica">Información Básica del Reino</a></li>
+                        <li><a href="#cronologia-hallownest">Cronología y Soñadores</a></li>
+                        <li><a href="#problemas">Problemas y la Infección</a></li>
+                        <li><a href="#soluciones">Soluciones y Finales</a></li>
                     </ul>
                 </div>
 
@@ -1357,7 +1472,7 @@
                     <div class="contact-card">
                         <ul class="contact-list">
                             <li>
-                                <span class="contact-label">Autor / Responsable</span>
+                                <span class="contact-label">Autor / Desarrollador</span>
                                 <span class="contact-value">[Tu Nombre Completo Aquí]</span>
                             </li>
                             <li>
@@ -1369,24 +1484,24 @@
                                 <a href="tel:+50300000000" class="contact-value">+503 0000-0000</a>
                             </li>
                             <li>
-                                <span class="contact-label">Ubicación / Institución</span>
-                                <span class="contact-value">[Ciudad, País / Universidad o Institución]</span>
+                                <span class="contact-label">Ubicación / Proyecto</span>
+                                <span class="contact-value">[Tu Ciudad, País / Universidad o Estudio]</span>
                             </li>
                         </ul>
 
-                        <div class="social-links" aria-label="Enlaces profesionales y académicos">
-                            <a href="#contacto" class="social-pill">LinkedIn</a>
+                        <div class="social-links" aria-label="Enlaces profesionales y redes">
                             <a href="#contacto" class="social-pill">GitHub</a>
                             <a href="#contacto" class="social-pill">Portafolio</a>
-                            <a href="#contacto" class="social-pill">ORCID / Academia</a>
+                            <a href="#contacto" class="social-pill">LinkedIn</a>
+                            <a href="#contacto" class="social-pill">Discord / Comunidad</a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2026 [Tu Nombre o Proyecto] · Contenido con fines estrictamente académicos y educativos.</p>
-                <a href="#inicio" class="back-top-link">↑ Volver arriba</a>
+                <p>&copy; 2026 [Tu Nombre o Proyecto] · Tributo narrativo a Hollow Knight (Team Cherry).</p>
+                <a href="#inicio" class="back-top-link">↑ Ascender a la superficie</a>
             </div>
         </div>
     </footer>
