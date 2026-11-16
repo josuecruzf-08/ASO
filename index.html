@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Terrorismo: Información Básica, Problemas y Soluciones</title>
+    <style>
+        /* ==========================================================================
+           1. VARIABLES DE DISEÑO Y CONFIGURACIÓN BASE (PALETA EDITORIAL SOBRIA)
+           ========================================================================== */
+        :root {
+            --color-navy-950: #090e17;
+            --color-navy-900: #0f172a;
+            --color-slate-800: #1e293b;
+            --color-slate-700: #334155;
+            --color-slate-600: #475569;
+            --color-slate-400: #94a3b8;
+            --color-bone-100: #f8fafc;
+            --color-bone-200: #f1f5f9;
+            --color-border: #cbd5e1;
+            --color-accent-crimson: #991b1b;
+            --color-accent-crimson-hover: #7f1d1d;
+            --color-accent-amber: #b45309;
+            --color-white: #ffffff;
+
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+            --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.1);
+            --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.15);
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --transition-base: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Reset y desplazamiento suave nativo */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bone-100);
+            color: var(--color-slate-800);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Contenedor centrado reutilizable */
+        .container {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Tipografía de encabezados */
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            color: var(--color-navy-900);
+            line-height: 1.25;
+        }
+
+        /* ==========================================================================
+           2. MENÚ DINÁMICO DE OPCIONES (STICKY HEADER + HAMBURGUESA CSS PURO)
+           ========================================================================== */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(15, 23, 42, 0.97);
+            backdrop-filter: blur(8px);
+            border-bottom: 3px solid var(--color-accent-crimson);
+            box-shadow: var(--shadow-md);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 74px;
+            position: relative;
+        }
+
+        /* Identidad / Logotipo textual */
+        .brand {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--color-white);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .brand-subtitle {
+            font-size: 0.72rem;
+            color: var(--color-slate-400);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* Checkbox oculto para controlar el menú móvil */
+        .nav-toggle-checkbox {
+            display: none;
+        }
+
+        /* Botón hamburguesa (visible solo en pantallas pequeñas) */
+        .nav-toggle-label {
+            display: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            flex-direction: column;
+            gap: 5px;
+            border: 1px solid var(--color-slate-700);
+            border-radius: 6px;
+            transition: var(--transition-base);
+        }
+
+        .nav-toggle-label:hover {
+            border-color: var(--color-white);
+        }
+
+        .nav-toggle-label span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-white);
+            transition: var(--transition-base);
+        }
+
+        /* Lista de navegación principal */
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: inline-block;
+            padding: 0.6rem 1rem;
+            color: var(--color-bone-200);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            border-radius: 6px;
+            position: relative;
+            transition: var(--transition-base);
+        }
+
+        /* Indicador animado inferior al pasar el cursor o enfocar */
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 4px;
+            left: 1rem;
+            right: 1rem;
+            height: 2px;
+            background-color: var(--color-accent-amber);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            color: var(--color-white);
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-link:hover::after,
+        .nav-link:focus::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Submenú desplegable CSS puro en escritorio */
+        .has-dropdown:hover .dropdown-menu,
+        .has-dropdown:focus-within .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 230px;
+            background-color: var(--color-navy-900);
+            border: 1px solid var(--color-slate-700);
+            border-top: 2px solid var(--color-accent-amber);
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            list-style: none;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition-base);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.6rem 1.2rem;
+            color: var(--color-bone-200);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: background-color 0.2s ease, padding-left 0.2s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--color-slate-800);
+            color: var(--color-white);
+            padding-left: 1.5rem;
+        }
+
+        .nav-cta {
+            background-color: var(--color-accent-crimson);
+            color: var(--color-white);
+            margin-left: 0.5rem;
+        }
+
+        .nav-cta:hover {
+            background-color: var(--color-accent-crimson-hover);
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        /* ==========================================================================
+           3. HERO / ENCABEZADO PRINCIPAL
+           ========================================================================== */
+        .hero {
+            background: linear-gradient(135deg, var(--color-navy-950) 0%, var(--color-navy-900) 55%, var(--color-slate-800) 100%);
+            color: var(--color-white);
+            padding: 5.5rem 0 5rem;
+            border-bottom: 1px solid var(--color-slate-700);
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: rgba(153, 27, 27, 0.25);
+            border: 1px solid rgba(248, 113, 113, 0.4);
+            color: #fca5a5;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            color: var(--color-white);
+            font-size: clamp(2.1rem, 4.5vw, 3.4rem);
+            max-width: 850px;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-lead {
+            font-size: clamp(1.05rem, 1.8vw, 1.22rem);
+            color: var(--color-slate-400);
+            max-width: 740px;
+            margin-bottom: 2.25rem;
+            font-weight: 300;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.85rem 1.75rem;
+            border-radius: var(--radius-md);
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-base);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent-crimson);
+            color: var(--color-white);
+            border: 1px solid var(--color-accent-crimson);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-accent-crimson-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(153, 27, 27, 0.35);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-white);
+            border: 1px solid var(--color-slate-600);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            border-color: var(--color-white);
+        }
+
+        /* Franja de indicadores académicos en el Hero */
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.25rem;
+            padding-top: 2.25rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .metric-box {
+            background-color: rgba(255, 255, 255, 0.04);
+            border-left: 3px solid var(--color-accent-amber);
+            padding: 1rem 1.25rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .metric-value {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--color-white);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .metric-desc {
+            font-size: 0.82rem;
+            color: var(--color-slate-400);
+        }
+
+        /* ==========================================================================
+           4. ESTRUCTURA COMÚN DE SECCIONES
+           ========================================================================== */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-alt {
+            background-color: var(--color-bone-200);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .section-header {
+            max-width: 780px;
+            margin-bottom: 3rem;
+        }
+
+        .section-kicker {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--color-accent-crimson);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 3vw, 2.35rem);
+            margin-bottom: 0.85rem;
+        }
+
+        .section-subtitle {
+            color: var(--color-slate-600);
+            font-size: 1.05rem;
+        }
+
+        /* ==========================================================================
+           5. SECCIÓN: INFORMACIÓN BÁSICA (TARJETAS + PESTAÑAS EN CSS PURO)
+           ========================================================================== */
+        .info-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .info-card {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-top: 4px solid var(--color-navy-900);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-base);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-top-color: var(--color-accent-crimson);
+        }
+
+        .info-card-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-accent-amber);
+            margin-bottom: 0.65rem;
+        }
+
+        .info-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-card p {
+            font-size: 0.94rem;
+            color: var(--color-slate-600);
+        }
+
+        /* Sistema de Pestañas en CSS Puro (Radio Inputs + :checked) */
+        .css-tabs-wrapper {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .tabs-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* Ocultar los inputs radio nativos */
+        .tab-radio {
+            display: none;
+        }
+
+        /* Etiquetas que funcionan como botones de pestaña */
+        .tab-label {
+            flex: 1 1 200px;
+            padding: 1.1rem 1.25rem;
+            background-color: var(--color-bone-200);
+            color: var(--color-slate-700);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 2px solid var(--color-border);
+            border-right: 1px solid var(--color-border);
+            transition: var(--transition-base);
+            user-select: none;
+        }
+
+        .tab-label:last-of-type {
+            border-right: none;
+        }
+
+        .tab-label:hover {
+            background-color: #e2e8f0;
+            color: var(--color-navy-900);
+        }
+
+        /* Estilo activo cuando el radio correspondiente está marcado */
+        #tab-1:checked ~ label[for="tab-1"],
+        #tab-2:checked ~ label[for="tab-2"],
+        #tab-3:checked ~ label[for="tab-3"],
+        #tab-4:checked ~ label[for="tab-4"] {
+            background-color: var(--color-white);
+            color: var(--color-accent-crimson);
+            border-bottom-color: var(--color-accent-crimson);
+        }
+
+        /* Paneles de contenido */
+        .tab-panel {
+            order: 99;
+            width: 100%;
+            display: none;
+            padding: 2.25rem;
+            animation: fadeInPanel 0.35s ease;
+        }
+
+        @keyframes fadeInPanel {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #tab-1:checked ~ #panel-1,
+        #tab-2:checked ~ #panel-2,
+        #tab-3:checked ~ #panel-3,
+        #tab-4:checked ~ #panel-4 {
+            display: block;
+        }
+
+        .tab-panel h4 {
+            font-size: 1.35rem;
+            margin-bottom: 0.85rem;
+            color: var(--color-navy-900);
+        }
+
+        .tab-panel p {
+            margin-bottom: 1rem;
+            color: var(--color-slate-700);
+            font-size: 0.96rem;
+        }
+
+        .tab-highlight {
+            background-color: var(--color-bone-100);
+            border-left: 4px solid var(--color-accent-amber);
+            padding: 1rem 1.25rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-size: 0.9rem;
+            color: var(--color-slate-700);
+        }
+
+        /* ==========================================================================
+           6. SECCIÓN: PROBLEMAS Y CONSECUENCIAS (CSS GRID ESTRUCTURADO)
+           ========================================================================== */
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .problem-card {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition-base);
+            position: relative;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-slate-400);
+        }
+
+        .problem-number {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: rgba(153, 27, 27, 0.18);
+            line-height: 1;
+            margin-bottom: 0.75rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.22rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-navy-900);
+        }
+
+        .problem-card p {
+            font-size: 0.93rem;
+            color: var(--color-slate-600);
+            margin-bottom: 1.25rem;
+        }
+
+        .problem-impact {
+            padding-top: 0.9rem;
+            border-top: 1px solid var(--color-bone-200);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--color-accent-crimson);
+        }
+
+        /* ==========================================================================
+           7. SECCIÓN: SOLUCIONES Y ESTRATEGIAS (ACORDEONES NATIVOS <details>)
+           ========================================================================== */
+        .solutions-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .solutions-intro-box {
+            background-color: var(--color-navy-900);
+            color: var(--color-white);
+            padding: 2.25rem;
+            border-radius: var(--radius-lg);
+            border-top: 4px solid var(--color-accent-amber);
+            box-shadow: var(--shadow-md);
+        }
+
+        .solutions-intro-box h3 {
+            color: var(--color-white);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .solutions-intro-box p {
+            color: var(--color-slate-400);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .pillar-list {
+            list-style: none;
+            font-size: 0.88rem;
+            color: var(--color-bone-200);
+        }
+
+        .pillar-list li {
+            padding: 0.55rem 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .pillar-list li:last-child {
+            border-bottom: none;
+        }
+
+        .pillar-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--color-accent-amber);
+            flex-shrink: 0;
+        }
+
+        /* Acordeones interactivos con <details> y <summary> */
+        .accordion-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .accordion-item {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition-base);
+        }
+
+        .accordion-item[open] {
+            border-color: var(--color-navy-900);
+            box-shadow: var(--shadow-md);
+        }
+
+        .accordion-summary {
+            list-style: none;
+            padding: 1.25rem 1.5rem;
+            font-family: var(--font-serif);
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--color-navy-900);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            background-color: var(--color-white);
+            transition: background-color 0.2s ease;
+        }
+
+        .accordion-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .accordion-summary:hover {
+            background-color: var(--color-bone-100);
+        }
+
+        .accordion-icon {
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--color-accent-crimson);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .accordion-item[open] .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--color-slate-600);
+            font-size: 0.94rem;
+            border-top: 1px solid var(--color-bone-200);
+            padding-top: 1rem;
+        }
+
+        .accordion-content ul {
+            margin-top: 0.65rem;
+            padding-left: 1.25rem;
+        }
+
+        .accordion-content li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* ==========================================================================
+           8. FOOTER COMPLETO CON INFORMACIÓN DE CONTACTO
+           ========================================================================== */
+        .site-footer {
+            background-color: var(--color-navy-950);
+            color: var(--color-slate-400);
+            padding: 4.5rem 0 2rem;
+            border-top: 4px solid var(--color-accent-crimson);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1.2fr;
+            gap: 2.5rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--color-slate-800);
+        }
+
+        .footer-col h3 {
+            color: var(--color-white);
+            font-size: 1.15rem;
+            margin-bottom: 1.1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .footer-about p {
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.65rem;
+        }
+
+        .footer-links a {
+            color: var(--color-slate-400);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-white);
+            padding-left: 5px;
+        }
+
+        /* Tarjeta de Contacto Editable / Lista para personalizar */
+        .contact-card {
+            background-color: var(--color-navy-900);
+            border: 1px solid var(--color-slate-800);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .contact-list {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .contact-list li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-accent-amber);
+            font-weight: 700;
+        }
+
+        .contact-value {
+            color: var(--color-bone-100);
+            text-decoration: none;
+            word-break: break-word;
+        }
+
+        .contact-value:hover {
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1.15rem;
+        }
+
+        .social-pill {
+            display: inline-block;
+            padding: 0.4rem 0.85rem;
+            background-color: var(--color-slate-800);
+            color: var(--color-bone-200);
+            text-decoration: none;
+            font-size: 0.8rem;
+            border-radius: 999px;
+            border: 1px solid var(--color-slate-700);
+            transition: var(--transition-base);
+        }
+
+        .social-pill:hover {
+            background-color: var(--color-accent-crimson);
+            border-color: var(--color-accent-crimson);
+            color: var(--color-white);
+        }
+
+        .footer-bottom {
+            padding-top: 1.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.82rem;
+        }
+
+        .back-top-link {
+            color: var(--color-bone-200);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.45rem 0.9rem;
+            border: 1px solid var(--color-slate-700);
+            border-radius: 6px;
+            transition: var(--transition-base);
+        }
+
+        .back-top-link:hover {
+            background-color: var(--color-slate-800);
+            border-color: var(--color-white);
+        }
+
+        /* ==========================================================================
+           9. DISEÑO RESPONSIVO (MÓVILES Y TABLETS)
+           ========================================================================== */
+        @media (max-width: 920px) {
+            .solutions-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle-label {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 74px;
+                left: 0;
+                right: 0;
+                background-color: var(--color-navy-900);
+                flex-direction: column;
+                align-items: stretch;
+                padding: 1rem 1.5rem 1.5rem;
+                border-bottom: 2px solid var(--color-accent-crimson);
+                box-shadow: var(--shadow-lg);
+                display: none;
+            }
+
+            /* Mostrar menú al marcar el checkbox */
+            .nav-toggle-checkbox:checked ~ .nav-menu {
+                display: flex;
+            }
+
+            /* Animación de icono hamburguesa a X */
+            .nav-toggle-checkbox:checked ~ .nav-toggle-label span:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+            }
+            .nav-toggle-checkbox:checked ~ .nav-toggle-label span:nth-child(2) {
+                opacity: 0;
+            }
+            .nav-toggle-checkbox:checked ~ .nav-toggle-label span:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+
+            .nav-link {
+                display: block;
+                padding: 0.75rem 0.5rem;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                border-left: 2px solid var(--color-accent-amber);
+                margin-left: 0.75rem;
+                padding: 0.25rem 0;
+                background-color: transparent;
+            }
+
+            .nav-cta {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                text-align: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-label {
+                flex: 1 1 100%;
+                border-right: none;
+            }
+        }
+    </style>
+</head>
+<body id="inicio">
+
+    <!-- ======================================================================
+         BARRA DE NAVEGACIÓN PEGAJOSA (MENÚ DINÁMICO EN CSS PURO)
+         ====================================================================== -->
+    <header class="site-header">
+        <div class="container navbar">
+            <a href="#inicio" class="brand">
+                <span class="brand-title">Observatorio de Seguridad</span>
+                <span class="brand-subtitle">Análisis Académico del Terrorismo</span>
+            </a>
+
+            <!-- Control hamburguesa sin JavaScript -->
+            <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" aria-label="Abrir menú de navegación">
+            <label for="nav-toggle" class="nav-toggle-label" title="Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- Opciones de navegación -->
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#inicio" class="nav-link">Inicio</a>
+                </li>
+                <li class="nav-item has-dropdown">
+                    <a href="#informacion-basica" class="nav-link">Información Básica ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#informacion-basica">Definición y Elementos</a></li>
+                        <li><a href="#explorador-historico">Evolución Histórica</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#problemas" class="nav-link">Problemas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#soluciones" class="nav-link">Soluciones</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contacto" class="nav-link nav-cta">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ======================================================================
+         HERO / ENCABEZADO PRINCIPAL
+         ====================================================================== -->
+    <section class="hero">
+        <div class="container">
+            <span class="hero-badge">Ciencias Políticas · Sociología · Derecho Internacional</span>
+            <h1>El Terrorismo: Comprensión Estructural, Desafíos y Respuestas Globales</h1>
+            <p class="hero-lead">
+                Un análisis objetivo sobre los fundamentos conceptuales de la violencia política asimétrica, las problemáticas humanitarias e institucionales que genera y las estrategias multilaterales diseñadas para su prevención.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#informacion-basica" class="btn btn-primary">Explorar Información Básica</a>
+                <a href="#soluciones" class="btn btn-secondary">Ver Estrategias y Soluciones</a>
+            </div>
+
+            <div class="hero-metrics">
+                <div class="metric-box">
+                    <span class="metric-value">19 Convenios</span>
+                    <span class="metric-desc">Instrumentos jurídicos universales de la ONU contra actos terroristas.</span>
+                </div>
+                <div class="metric-box">
+                    <span class="metric-value">4 Pilares</span>
+                    <span class="metric-desc">Estrategia Global de las Naciones Unidas aprobada por consenso.</span>
+                </div>
+                <div class="metric-box">
+                    <span class="metric-value">Enfoque Integral</span>
+                    <span class="metric-desc">Equilibrio entre seguridad nacional, prevención social y Derechos Humanos.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- ==================================================================
+             SECCIÓN 1: INFORMACIÓN BÁSICA (TARJETAS + PESTAÑAS CSS PURO)
+             ================================================================== -->
+        <section id="informacion-basica" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker">01 · Fundamentos Conceptuales</span>
+                    <h2 class="section-title">Información Básica sobre el Terrorismo</h2>
+                    <p class="section-subtitle">
+                        Desde la perspectiva académica y jurídica, el terrorismo se estudia como una táctica de violencia asimétrica orientada a producir un impacto psicológico y político que trasciende a las víctimas directas.
+                    </p>
+                </div>
+
+                <!-- Tarjetas de pilares conceptuales -->
+                <div class="info-cards-grid">
+                    <article class="info-card">
+                        <span class="info-card-tag">Definición Académica</span>
+                        <h3>Naturaleza Instrumental</h3>
+                        <p>
+                            Consiste en el uso premeditado o la amenaza de violencia contra población civil o infraestructura no combatiente, con el fin de coaccionar a gobiernos, intimidar a la sociedad o imponer agendas ideológicas, políticas o religiosas.
+                        </p>
+                    </article>
+
+                    <article class="info-card">
+                        <span class="info-card-tag">Características Clave</span>
+                        <h3>Asimetría y Clandestinidad</h3>
+                        <p>
+                            A diferencia de la guerra convencional, los actores terroristas operan de forma clandestina o en red, evitando el enfrentamiento militar directo y buscando maximizar la visibilidad mediática de cada acción.
+                        </p>
+                    </article>
+
+                    <article class="info-card">
+                        <span class="info-card-tag">Marco Jurídico</span>
+                        <h3>Derecho Internacional</h3>
+                        <p>
+                            El Derecho Internacional Humanitario (Convenios de Ginebra) prohíbe de manera absoluta los ataques contra civiles y los actos destinados a sembrar el terror entre la población en cualquier contexto.
+                        </p>
+                    </article>
+                </div>
+
+                <!-- Pestañas Interactivas en CSS Puro (Contexto Histórico y Tipologías) -->
+                <div id="explorador-historico" class="css-tabs-wrapper">
+                    <div class="tabs-container">
+                        <input type="radio" name="info-tabs" id="tab-1" class="tab-radio" checked>
+                        <label for="tab-1" class="tab-label">1. Origen del Término</label>
+
+                        <input type="radio" name="info-tabs" id="tab-2" class="tab-radio">
+                        <label for="tab-2" class="tab-label">2. Olas Modernas (XIX–XX)</label>
+
+                        <input type="radio" name="info-tabs" id="tab-3" class="tab-radio">
+                        <label for="tab-3" class="tab-label">3. Era Contemporánea</label>
+
+                        <input type="radio" name="info-tabs" id="tab-4" class="tab-radio">
+                        <label for="tab-4" class="tab-label">4. Tipologías Principales</label>
+
+                        <!-- Panel 1 -->
+                        <div id="panel-1" class="tab-panel">
+                            <h4>Origen Histórico del Concepto</h4>
+                            <p>
+                                El término «terrorismo» ingresó al léxico político moderno durante la Revolución Francesa (1793–1794), asociado al <em>Régimen del Terror</em> jacobino, cuando el Estado empleó medidas coercitivas extremas para consolidar el orden revolucionario.
+                            </p>
+                            <p>
+                                A finales del siglo XIX, el significado evolucionó para describir a grupos clandestinos no estatales que utilizaban atentados contra figuras políticas como método de propaganda revolucionaria.
+                            </p>
+                            <div class="tab-highlight">
+                                <strong>Dato clave:</strong> El concepto pasó de designar la coerción ejercida desde el poder estatal a identificar principalmente tácticas insurgentes y asimétricas contra el Estado y la sociedad civil.
+                            </div>
+                        </div>
+
+                        <!-- Panel 2 -->
+                        <div id="panel-2" class="tab-panel">
+                            <h4>Las Olas Históricas del Terrorismo Moderno</h4>
+                            <p>
+                                Según el politólogo David Rapoport, el terrorismo moderno atravesó tres grandes ciclos entre 1880 y 1980: la <strong>ola anarquista</strong> (magnicidios políticos impulsados por el telégrafo y la dinamita), la <strong>ola anticolonial</strong> (movimientos de independencia tras las guerras mundiales) y la <strong>ola de la Nueva Izquierda</strong> (secuestros aéreos y grupos urbanos durante la Guerra Fría).
+                            </p>
+                            <div class="tab-highlight">
+                                <strong>Factor tecnológico:</strong> Cada ciclo histórico estuvo estrechamente vinculado a los avances en transporte y medios de comunicación de masas de su época.
+                            </div>
+                        </div>
+
+                        <!-- Panel 3 -->
+                        <div id="panel-3" class="tab-panel">
+                            <h4>Transformaciones en el Siglo XXI</h4>
+                            <p>
+                                A partir de finales del siglo XX y comienzos del XXI, emergieron redes transnacionales descentralizadas con motivaciones religiosas extremistas, así como fenómenos contemporáneos caracterizados por actores individuales autorradicalizados en entornos digitales y ataques contra infraestructuras críticas.
+                            </p>
+                            <div class="tab-highlight">
+                                <strong>Tendencia actual:</strong> Menor dependencia de estructuras jerárquicas rígidas y mayor uso de plataformas encriptadas y propaganda algorítmica.
+                            </div>
+                        </div>
+
+                        <!-- Panel 4 -->
+                        <div id="panel-4" class="tab-panel">
+                            <h4>Clasificación Analítica por Motivación y Medio</h4>
+                            <p>
+                                En ciencias políticas y estudios de seguridad se distinguen diversas categorías: <strong>terrorismo nacionalista o separatista</strong> (reivindicaciones territoriales), <strong>ideológico</strong> (extrema izquierda o extrema derecha), <strong>religioso</strong> (fundamentalismo violento), <strong>terrorismo de Estado</strong> y amenazas emergentes como el <strong>ciberterrorismo</strong> y el <strong>bioterrorismo (QBRN)</strong>.
+                            </p>
+                            <div class="tab-highlight">
+                                <strong>Importancia taxonómica:</strong> Identificar la naturaleza de cada grupo permite diseñar políticas públicas y respuestas legales proporcionales y eficaces.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             SECCIÓN 2: PROBLEMAS Y CONSECUENCIAS (CSS GRID)
+             ================================================================== -->
+        <section id="problemas" class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker">02 · Diagnóstico y Riesgos</span>
+                    <h2 class="section-title">Principales Problemas y Consecuencias</h2>
+                    <p class="section-subtitle">
+                        El fenómeno terrorista desencadena efectos multidimensionales que afectan la seguridad humana, la estabilidad económica y la calidad de las instituciones democráticas.
+                    </p>
+                </div>
+
+                <div class="problems-grid">
+                    <!-- Problema 1 -->
+                    <article class="problem-card">
+                        <div>
+                            <div class="problem-number">01</div>
+                            <h3>Impacto Humanitario y Trauma Social</h3>
+                            <p>
+                                Pérdida de vidas civiles, lesiones permanentes, desplazamiento forzado de comunidades enteras y secuelas psicológicas colectivas que erosionan la confianza interpersonal y la cohesión social.
+                            </p>
+                        </div>
+                        <div class="problem-impact">Consecuencia: Crisis de desplazamiento y estrés postraumático colectivo</div>
+                    </article>
+
+                    <!-- Problema 2 -->
+                    <article class="problem-card">
+                        <div>
+                            <div class="problem-number">02</div>
+                            <h3>Radicalización en Entornos Digitales</h3>
+                            <p>
+                                Uso de redes sociales, foros encriptados y algoritmos de recomendación para difundir narrativas polarizantes, captar jóvenes vulnerables y fomentar ataques de actores solitarios difíciles de detectar.
+                            </p>
+                        </div>
+                        <div class="problem-impact">Consecuencia: Captación transfronteriza y aceleración del extremismo</div>
+                    </article>
+
+                    <!-- Problema 3 -->
+                    <article class="problem-card">
+                        <div>
+                            <div class="problem-number">03</div>
+                            <h3>Financiamiento Ilícito y Economías Criminales</h3>
+                            <p>
+                                Convergencia entre redes terroristas y crimen organizado mediante extorsión, tráfico ilícito, lavado de activos, empresas fachada y transferencia opaca de recursos financieros.
+                            </p>
+                        </div>
+                        <div class="problem-impact">Consecuencia: Corrupción institucional y distorsión de mercados</div>
+                    </article>
+
+                    <!-- Problema 4 -->
+                    <article class="problem-card">
+                        <div>
+                            <div class="problem-number">04</div>
+                            <h3>Desestabilización Institucional y Polarización</h3>
+                            <p>
+                                Debilitamiento de la gobernabilidad en Estados frágiles y riesgo de respuestas desproporcionadas en democracias que pueden restringir libertades civiles o estigmatizar minorías.
+                            </p>
+                        </div>
+                        <div class="problem-impact">Consecuencia: Tensión entre seguridad pública y Estado de derecho</div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             SECCIÓN 3: SOLUCIONES Y ESTRATEGIAS (ACORDEONES INTERACTIVOS CSS)
+             ================================================================== -->
+        <section id="soluciones" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker">03 · Respuestas Multilaterales y Preventivas</span>
+                    <h2 class="section-title">Soluciones y Estrategias de Prevención</h2>
+                    <p class="section-subtitle">
+                        La experiencia internacional demuestra que la fuerza policial o militar por sí sola es insuficiente; se requiere una arquitectura integral basada en prevención, inteligencia, cooperación y respeto a los Derechos Humanos.
+                    </p>
+                </div>
+
+                <div class="solutions-layout">
+                    <!-- Columna izquierda: Marco estratégico -->
+                    <aside class="solutions-intro-box">
+                        <h3>Estrategia Global de la ONU</h3>
+                        <p>
+                            Aprobada por la Asamblea General (Resolución 60/288), establece que la lucha eficaz contra el terrorismo exige abordar tanto sus manifestaciones operativas como sus causas estructurales.
+                        </p>
+                        <ul class="pillar-list">
+                            <li><span class="pillar-dot"></span> Abordar condiciones propicias al extremismo</li>
+                            <li><span class="pillar-dot"></span> Prevenir y combatir redes operativas</li>
+                            <li><span class="pillar-dot"></span> Fortalecer la capacidad institucional estatal</li>
+                            <li><span class="pillar-dot"></span> Garantizar los Derechos Humanos y la legalidad</li>
+                        </ul>
+                    </aside>
+
+                    <!-- Columna derecha: Acordeones desplegables en HTML5/CSS3 puro -->
+                    <div class="accordion-group">
+                        <details class="accordion-item" open>
+                            <summary class="accordion-summary">
+                                <span>1. Prevención del Extremismo Violento y Educación Cívica</span>
+                                <span class="accordion-icon">+</span>
+                            </summary>
+                            <div class="accordion-content">
+                                <p>
+                                    Consiste en intervenir antes de que los individuos adopten la violencia mediante políticas sociales inclusivas y fortalecimiento del pensamiento crítico:
+                                </p>
+                                <ul>
+                                    <li>Programas escolares de alfabetización mediática para identificar desinformación y propaganda extremista.</li>
+                                    <li>Inclusión socioeconómica y oportunidades laborales para juventudes en zonas vulnerables.</li>
+                                    <li>Diálogo intercultural y participación de líderes comunitarios y familias en la detección temprana.</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details class="accordion-item">
+                            <summary class="accordion-summary">
+                                <span>2. Inteligencia Financiera y Control de Activos Ilícitos</span>
+                                <span class="accordion-icon">+</span>
+                            </summary>
+                            <div class="accordion-content">
+                                <p>
+                                    Bloquear el flujo económico que sostiene el reclutamiento, la logística y la adquisición de armamento:
+                                </p>
+                                <ul>
+                                    <li>Aplicación de las recomendaciones del Grupo de Acción Financiera Internacional (GAFI).</li>
+                                    <li>Supervisión bancaria, trazabilidad de transacciones sospechosas y congelamiento judicial de fondos.</li>
+                                    <li>Cooperación entre Unidades de Inteligencia Financiera (UIF) a nivel regional y global.</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details class="accordion-item">
+                            <summary class="accordion-summary">
+                                <span>3. Cooperación Internacional e Intercambio de Inteligencia</span>
+                                <span class="accordion-icon">+</span>
+                            </summary>
+                            <div class="accordion-content">
+                                <p>
+                                    Dado el carácter transnacional de las redes actuales, ningún Estado puede afrontar el fenómeno de forma aislada:
+                                </p>
+                                <ul>
+                                    <li>Coordinación policial y judicial a través de INTERPOL, EUROPOL y organismos regionales.</li>
+                                    <li>Control fronterizo inteligente y verificación biométrica respetando la privacidad y el derecho de asilo.</li>
+                                    <li>Tratados de extradición y asistencia legal mutua para evitar la impunidad transfronteriza.</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details class="accordion-item">
+                            <summary class="accordion-summary">
+                                <span>4. Programas de Desradicalización y Reinserción Social</span>
+                                <span class="accordion-icon">+</span>
+                            </summary>
+                            <div class="accordion-content">
+                                <p>
+                                    Intervenciones especializadas destinadas a desvincular a personas involucradas en grupos extremistas y reducir la reincidencia:
+                                </p>
+                                <ul>
+                                    <li>Acompañamiento psicológico, mentoría ideológica y capacitación profesional en centros penitenciarios.</li>
+                                    <li>Redes de apoyo familiar y seguimiento comunitario tras el cumplimiento de penas judiciales.</li>
+                                    <li>Protección y reparación integral para las víctimas del terrorismo como voz legítima de paz.</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details class="accordion-item">
+                            <summary class="accordion-summary">
+                                <span>5. Ciberseguridad y Protección de Infraestructuras Críticas</span>
+                                <span class="accordion-icon">+</span>
+                            </summary>
+                            <div class="accordion-content">
+                                <p>
+                                    Resguardo de los sistemas esenciales para el funcionamiento de la sociedad moderna frente a sabotajes físicos o digitales:
+                                </p>
+                                <ul>
+                                    <li>Blindaje informático de redes eléctricas, hospitales, sistemas financieros y transporte.</li>
+                                    <li>Alianzas público-privadas con plataformas tecnológicas para retirar contenido que incite a la violencia.</li>
+                                    <li>Protocolos nacionales de resiliencia y respuesta rápida ante emergencias.</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ======================================================================
+         FOOTER COMPLETO CON ESPACIOS LISTOS PARA INFORMACIÓN DE CONTACTO
+         ====================================================================== -->
+    <footer id="contacto" class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Columna 1: Propósito del sitio -->
+                <div class="footer-col footer-about">
+                    <h3>Observatorio de Seguridad</h3>
+                    <p>
+                        Sitio web educativo e informativo dedicado al análisis riguroso del terrorismo desde las ciencias sociales, las relaciones internacionales y la prevención cívica.
+                    </p>
+                    <p>
+                        Desarrollado exclusivamente con estándares web nativos (HTML5 y CSS3 puro) para garantizar accesibilidad, velocidad y claridad documental.
+                    </p>
+                </div>
+
+                <!-- Columna 2: Navegación rápida -->
+                <div class="footer-col">
+                    <h3>Mapa del Sitio</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio y Resumen Ejecutivo</a></li>
+                        <li><a href="#informacion-basica">Información Básica y Definición</a></li>
+                        <li><a href="#explorador-historico">Contexto Histórico y Tipologías</a></li>
+                        <li><a href="#problemas">Problemas y Consecuencias</a></li>
+                        <li><a href="#soluciones">Soluciones y Estrategias ONU</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Información de contacto personalizable -->
+                <div class="footer-col">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-card">
+                        <ul class="contact-list">
+                            <li>
+                                <span class="contact-label">Autor / Responsable</span>
+                                <span class="contact-value">[Tu Nombre Completo Aquí]</span>
+                            </li>
+                            <li>
+                                <span class="contact-label">Correo Electrónico</span>
+                                <a href="mailto:tu.correo@ejemplo.com" class="contact-value">tu.correo@ejemplo.com</a>
+                            </li>
+                            <li>
+                                <span class="contact-label">Teléfono / WhatsApp</span>
+                                <a href="tel:+50300000000" class="contact-value">+503 0000-0000</a>
+                            </li>
+                            <li>
+                                <span class="contact-label">Ubicación / Institución</span>
+                                <span class="contact-value">[Ciudad, País / Universidad o Institución]</span>
+                            </li>
+                        </ul>
+
+                        <div class="social-links" aria-label="Enlaces profesionales y académicos">
+                            <a href="#contacto" class="social-pill">LinkedIn</a>
+                            <a href="#contacto" class="social-pill">GitHub</a>
+                            <a href="#contacto" class="social-pill">Portafolio</a>
+                            <a href="#contacto" class="social-pill">ORCID / Academia</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 [Tu Nombre o Proyecto] · Contenido con fines estrictamente académicos y educativos.</p>
+                <a href="#inicio" class="back-top-link">↑ Volver arriba</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
